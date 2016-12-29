@@ -1,0 +1,701 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="atom,ide,编辑器," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Atom&amp;#x4EC5;&amp;#x4EC5;&amp;#x63D0;&amp;#x4F9B;markdown&amp;#x9884;&amp;#x89C8;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x65E0;&amp;#x6CD5;&amp;#x6EE1;&amp;#x8DB3;&amp;#x65E5;&amp;#x5E38;&amp;#x7684;&amp;#x5199;&amp;#x4F5C;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x9700;&amp;#x5B89;&amp;#x8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Atom编辑器使用markdown走过的坑">
+<meta property="og:url" content="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/index.html">
+<meta property="og:site_name" content="爱信诺前端团队博客">
+<meta property="og:description" content="Atom&amp;#x4EC5;&amp;#x4EC5;&amp;#x63D0;&amp;#x4F9B;markdown&amp;#x9884;&amp;#x89C8;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x65E0;&amp;#x6CD5;&amp;#x6EE1;&amp;#x8DB3;&amp;#x65E5;&amp;#x5E38;&amp;#x7684;&amp;#x5199;&amp;#x4F5C;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x9700;&amp;#x5B89;&amp;#x8">
+<meta property="og:image" content="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/GIF.gif">
+<meta property="og:image" content="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/1.png">
+<meta property="og:updated_time" content="2016-12-29T06:22:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Atom编辑器使用markdown走过的坑">
+<meta name="twitter:description" content="Atom&amp;#x4EC5;&amp;#x4EC5;&amp;#x63D0;&amp;#x4F9B;markdown&amp;#x9884;&amp;#x89C8;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x65E0;&amp;#x6CD5;&amp;#x6EE1;&amp;#x8DB3;&amp;#x65E5;&amp;#x5E38;&amp;#x7684;&amp;#x5199;&amp;#x4F5C;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x9700;&amp;#x5B89;&amp;#x8">
+<meta name="twitter:image" content="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/GIF.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/"/>
+
+  <title> Atom编辑器使用markdown走过的坑 | 爱信诺前端团队博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?be0520fe78ddf7e9d894cc8bbd8f7f37";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">爱信诺前端团队博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">—— 没有最牛逼，只有更牛逼</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Atom编辑器使用markdown走过的坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-25T19:19:00+08:00" content="2016-12-25">
+              2016-12-25
+            </time>
+            <span class="post-meta-item-text">by 阿牛</span>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/踩坑记录/" itemprop="url" rel="index">
+                    <span itemprop="name">踩坑记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/25/Atom编辑器使用markdown走过的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/25/Atom编辑器使用markdown走过的坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Atom&#x4EC5;&#x4EC5;&#x63D0;&#x4F9B;markdown&#x9884;&#x89C8;&#x529F;&#x80FD;&#xFF0C;&#x65E0;&#x6CD5;&#x6EE1;&#x8DB3;&#x65E5;&#x5E38;&#x7684;&#x5199;&#x4F5C;&#x64CD;&#x4F5C;&#xFF0C;&#x9700;&#x5B89;&#x88C5;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;<br><strong>1.markdown-scroll-sync &#x5B9E;&#x73B0;&#x540C;&#x6B65;&#x6EDA;&#x52A8;</strong><br><strong>2.markdown-writer &#x5B9E;&#x73B0;&#x65B0;&#x5EFA;&#x6587;&#x7AE0;&#x3001;&#x4E0A;&#x4F20;&#x56FE;&#x7247;&#x3001;&#x4EE3;&#x7801;&#x683C;&#x5F0F;&#x5316;&#x7B49;&#x529F;&#x80FD;</strong><br>&#x7531;&#x4E8E;&#x8981;&#x914D;&#x5408;hexo&#x5199;&#x4F5C;&#x4F7F;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#xFF1A;<br>File Extension&#x503C;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;.md<br>Site Engine&#x503C;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;hexo<br>Site Drafts Directory&#x503C;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;{title}<br>Site Posts Directory&#x503C;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;/<br>&#x4FEE;&#x6539;&#x4E0A;&#x9762;2&#x4E2A;&#x7684;&#x539F;&#x56E0;&#x662F;&#x7531;&#x4E8E;&#x4F7F;&#x7528;&#x4E86;hexo-asset-image&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#xFF0C;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x672C;&#x5730;&#x56FE;&#x7247;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#x4E5F;&#x6709;&#x7EA6;&#x675F;&#x7684;&#x5730;&#x65B9;&#x5C31;&#x662F;&#x56FE;&#x7247;&#x6587;&#x4EF6;&#x5939;&#x548C;.md&#x6587;&#x4EF6;&#x540C;&#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x6587;&#x4EF6;&#x5939;&#x540D;&#x79F0;&#x548C;&#x6587;&#x7AE0;title&#x76F8;&#x540C;<br><a id="more"></a><br>&#x56FE;&#x7247;&#x4E0A;&#x4F20;&#x6548;&#x679C;&#x9884;&#x89C8;&#xFF1A;<br><img src="/2016/12/25/Atom&#x7F16;&#x8F91;&#x5668;&#x4F7F;&#x7528;markdown&#x8D70;&#x8FC7;&#x7684;&#x5751;/GIF.gif" alt=""><br>&#x7531;&#x4E8E;&#x8BBE;&#x7F6E;&#x4E86;Site Posts Directory&#x503C;&#x7684;&#x539F;&#x56E0;&#xFF0C;&#x5199;&#x6587;&#x7AE0;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x5B9A;&#x8981;&#x628A;_posts&#x6587;&#x4EF6;&#x5939;&#x4F5C;&#x4E3A;Atom&#x9879;&#x76EE;&#x6839;&#x76EE;&#xFF0C;&#x5982;&#x56FE;&#x4E0B;&#xFF1A;<br><img src="/2016/12/25/Atom&#x7F16;&#x8F91;&#x5668;&#x4F7F;&#x7528;markdown&#x8D70;&#x8FC7;&#x7684;&#x5751;/1.png" alt=""><br>&#x63D2;&#x4EF6;&#x9ED8;&#x8BA4;&#x7684;&#x65B0;&#x5EFA;&#x6587;&#x7AE0;&#x6A21;&#x7248;&#x53EA;&#x63D0;&#x4F9B;&#x4E86;&#x6807;&#x9898;&#x3001;&#x65E5;&#x671F;&#x6A21;&#x5757;&#xFF0C;&#x6211;&#x4EEC;&#x5199;&#x6587;&#x7AE0;&#x65F6;&#x8FD8;&#x8981;&#x5199;&#x5206;&#x7C7B;&#x3001;&#x6807;&#x7B7E;&#x4EE5;&#x53CA;&#x4F5C;&#x8005;&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x624B;&#x52A8;&#x6DFB;&#x52A0;&#xFF0C;&#x975E;&#x5E38;&#x4E0D;&#x65B9;&#x4FBF;&#xFF0C;&#x63D2;&#x4EF6;&#x6CA1;&#x63D0;&#x4F9B;&#x8BE5;&#x9879;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6539;&#xFF0C;&#x56E0;&#x6B64;&#x54B1;&#x4EEC;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x6E90;&#x7801;&#x3002;<br>&#x6253;&#x5F00;&#x63D2;&#x4EF6;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">C:\Users\&#x7528;&#x6237;&#x540D;\.atom\packages\markdown-writer\libs\config.coffee</div><div class="line">C:\Users\&#x7528;&#x6237;&#x540D;\.atom\packages\markdown-writer\libs\config.cson</div></pre></td></tr></table></figure></p>
+<p>&#x5206;&#x522B;&#x641C;&#x7D22;frontMatter&#xFF0C;&#x5C06;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">frontMatter: &quot;&quot;&quot;</div><div class="line">layout: &quot;{layout}&quot;</div><div class="line">title: &quot;{title}&quot;</div><div class="line">date: &quot;{date}&quot;</div><div class="line">---</div><div class="line">&quot;&quot;&quot;</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">frontMatter: &quot;&quot;&quot;</div><div class="line">---</div><div class="line">layout: &quot;{layout}&quot;</div><div class="line">title: &quot;{title}&quot;</div><div class="line">date: &quot;{date}&quot;</div><div class="line">tags:</div><div class="line">-</div><div class="line">author: &#x963F;&#x725B;</div><div class="line">categories:</div><div class="line">-</div><div class="line">---</div><div class="line">&quot;&quot;&quot;</div></pre></td></tr></table></figure></p>
+<p>&#x4FEE;&#x6539;&#x5B8C;&#x6210;&#x591F;&#x4E00;&#x5B9A;&#x8981;&#x91CD;&#x542F;Atom&#xFF0C;&#x518D;&#x65B0;&#x5EFA;&#x6587;&#x7AE0;&#x65F6;&#x5C31;&#x4F1A;&#x591A;&#x51FA;&#x4E86;&#x6DFB;&#x52A0;&#x7684;&#x6A21;&#x5757;&#x3002;<br><strong>3.tool-bar&#x548C;tool-bar-markdown-writer</strong><br>&#x8FD9;2&#x4E2A;&#x63D2;&#x4EF6;&#x662F;&#x914D;&#x5408;markdown-writer&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x589E;&#x52A0;Atom&#x5DE5;&#x5177;&#x680F;&#xFF0C;&#x65B9;&#x4FBF;&#x5199;&#x4F5C;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/atom/" rel="tag">#atom</a>
+          
+            <a href="/tags/ide/" rel="tag">#ide</a>
+          
+            <a href="/tags/编辑器/" rel="tag">#编辑器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/20/StickyFooter/" rel="next" title="实现Sticky Footer的最佳套路">
+                <i class="fa fa-chevron-left"></i> 实现Sticky Footer的最佳套路
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/25/制作iconfont图标/" rel="prev" title="制作iconfont图标">
+                制作iconfont图标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/25/Atom编辑器使用markdown走过的坑/"
+           data-title="Atom编辑器使用markdown走过的坑" data-url="http://yoursite.com/2016/12/25/Atom编辑器使用markdown走过的坑/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.jpg"
+               alt="Aisino FEX" />
+          <p class="site-author-name" itemprop="name">Aisino FEX</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aisino FEX</span>
+</div>
+<style>
+.footer-inner:before { float:none;}
+.powered-by::after { content:''}
+.powered-by .theme-link { margin:0 5px; font-size:12px; text-decoration:none; border-bottom:none;}
+.powered-by .theme-link:hover { text-decoration:underline;}
+.theme-info { font-size:12px;}
+</style>
+<div class="powered-by" style="display:block; margin:0;">
+	<a class="theme-link" href="http://zjaisino.github.io/" target="_blank">爱信诺前端规范</a>
+	<a class="theme-link" href="http://www.jss.com.cn/" target="_blank">诺诺服务</a>
+	<a class="theme-link" href="http://www.axnsc.com/" target="_blank">诺诺商城</a>
+	<a class="theme-link" href="https://www.axnjf.com/" target="_blank">诺诺金服</a>
+	<a class="theme-link" href="http://cloud.jss.com.cn/" target="_blank">诺诺云记账</a>
+</div>
+
+<div class="theme-info" style="display:block;">
+	<span>FEX 是爱信诺研发中心 [前端开发团队] 内部名称，其中 FE 是 Front End 的缩写，X 代表我们不仅关注前端技术，还更重视全端及全栈的能力。</span>
+</div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery/jquery.layer.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery/function.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"axnfex"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

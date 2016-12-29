@@ -1,0 +1,706 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="移动端,路由,route,SUI," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="SUI Mobile &amp;#x662F;&amp;#x4E00;&amp;#x5957;&amp;#x57FA;&amp;#x4E8E;Framework7&amp;#x5F00;&amp;#x53D1;&amp;#x7684;UI&amp;#x5E93;&amp;#x3002;&amp;#x5B83;&amp;#x975E;&amp;#x5E38;&amp;#x8F7B;&amp;#x91CF;&amp;#x3001;&amp;#x7CBE;&amp;#x7F8E;&amp;#xFF0C;&amp;#x53EA;&amp;#x9700;&amp;#x8981;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跳出SUI Mobile路由坑">
+<meta property="og:url" content="http://yoursite.com/2016/12/10/SUI-mobile-router/index.html">
+<meta property="og:site_name" content="爱信诺前端团队博客">
+<meta property="og:description" content="SUI Mobile &amp;#x662F;&amp;#x4E00;&amp;#x5957;&amp;#x57FA;&amp;#x4E8E;Framework7&amp;#x5F00;&amp;#x53D1;&amp;#x7684;UI&amp;#x5E93;&amp;#x3002;&amp;#x5B83;&amp;#x975E;&amp;#x5E38;&amp;#x8F7B;&amp;#x91CF;&amp;#x3001;&amp;#x7CBE;&amp;#x7F8E;&amp;#xFF0C;&amp;#x53EA;&amp;#x9700;&amp;#x8981;&amp;">
+<meta property="og:image" content="http://yoursite.com/2016/12/10/SUI-mobile-router/20161210094150.png">
+<meta property="og:image" content="http://yoursite.com/2016/12/10/SUI-mobile-router/38.png">
+<meta property="og:image" content="http://yoursite.com/2016/12/10/SUI-mobile-router/fg.gif">
+<meta property="og:updated_time" content="2016-12-29T06:22:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跳出SUI Mobile路由坑">
+<meta name="twitter:description" content="SUI Mobile &amp;#x662F;&amp;#x4E00;&amp;#x5957;&amp;#x57FA;&amp;#x4E8E;Framework7&amp;#x5F00;&amp;#x53D1;&amp;#x7684;UI&amp;#x5E93;&amp;#x3002;&amp;#x5B83;&amp;#x975E;&amp;#x5E38;&amp;#x8F7B;&amp;#x91CF;&amp;#x3001;&amp;#x7CBE;&amp;#x7F8E;&amp;#xFF0C;&amp;#x53EA;&amp;#x9700;&amp;#x8981;&amp;">
+<meta name="twitter:image" content="http://yoursite.com/2016/12/10/SUI-mobile-router/20161210094150.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/10/SUI-mobile-router/"/>
+
+  <title> 跳出SUI Mobile路由坑 | 爱信诺前端团队博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?be0520fe78ddf7e9d894cc8bbd8f7f37";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">爱信诺前端团队博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">—— 没有最牛逼，只有更牛逼</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                跳出SUI Mobile路由坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-10T10:52:45+08:00" content="2016-12-10">
+              2016-12-10
+            </time>
+            <span class="post-meta-item-text">by 荀彧</span>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/route/" itemprop="url" rel="index">
+                    <span itemprop="name">route</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/10/SUI-mobile-router/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/10/SUI-mobile-router/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>SUI Mobile &#x662F;&#x4E00;&#x5957;&#x57FA;&#x4E8E;Framework7&#x5F00;&#x53D1;&#x7684;UI&#x5E93;&#x3002;&#x5B83;&#x975E;&#x5E38;&#x8F7B;&#x91CF;&#x3001;&#x7CBE;&#x7F8E;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5F15;&#x5165;&#x6211;&#x4EEC;&#x7684;CDN&#x6587;&#x4EF6;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x80FD;&#x517C;&#x5BB9;&#x5230; iOS 6.0+ &#x548C;Android 4.0+&#xFF0C;&#x975E;&#x5E38;&#x9002;&#x5408;&#x5F00;&#x53D1;&#x8DE8;&#x5E73;&#x53F0;WebApp&#x3002;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x6309;&#x7167;iOS&#x98CE;&#x683C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x6240;&#x6709;&#x6709;&#x5F88;&#x591A;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;iOS&#x72EC;&#x6709;&#x7684;&#x70AB;&#x9177;&#x8BBE;&#x8BA1;&#x3002;<br>    SUI&#x8DEF;&#x7531;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;&#x5185;&#x8054;&#x9875;&#x9762;&#x548C;ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;</p>
+<p>##&#x5185;&#x8054;&#x9875;&#x9762;&#x586B;&#x5751;</p>
+<h3 id="&#x7528;&#x6CD5;&#xFF1A;"><a href="#&#x7528;&#x6CD5;&#xFF1A;" class="headerlink" title="&#x7528;&#x6CD5;&#xFF1A;"></a>&#x7528;&#x6CD5;&#xFF1A;</h3><p>1&#x3001;a&#x94FE;&#x63A5;&#x76F4;&#x63A5;<code>&lt;a href=&quot;#{page-id}&quot;&gt;&lt;/a&gt;</code>&#x3002;<br>2&#x3001;js&#x65B9;&#x6CD5;$.router.load(&#x201C;#{page-id&#x201D;&#xFF09;<br>&#x5185;&#x8054;&#x9875;&#x9762;&#x8FDE;&#x4E2A;&#x9875;&#x9762;&#x95F4;&#x76F8;&#x4E92;&#x8DF3;&#x8F6C;&#x6CA1;&#x4E00;&#x70B9;&#x95EE;&#x9898;<br><img src="/2016/12/10/SUI-mobile-router/20161210094150.png" alt="&#x6B64;&#x5904;&#x8F93;&#x5165;&#x56FE;&#x7247;&#x7684;&#x63CF;&#x8FF0;"><br><a id="more"></a><br>&#x4F46;&#x662F;&#x5F53;&#x5185;&#x8054;&#x589E;&#x52A0;&#x5230;&#x8D85;&#x8FC7;&#x4E24;&#x4E2A;&#x9875;&#x9762;&#x65F6;&#xFF0C;&#x7528;js&#x8DF3;&#x8F6C;&#x5728;Android&#x673A;&#x4E0A;&#x5C31;&#x4F1A;&#x51FA;&#x73B0;&#x9875;&#x9762;&#x6765;&#x56DE;&#x8DF3;&#x8F6C;&#x7684;BUG&#x3002;&#x7531;&#x4E8E;&#x8FD9;&#x4E2A;&#x6846;&#x67B6;&#x5DF2;&#x4E0D;&#x5728;&#x7EF4;&#x62A4;&#xFF0C;github&#x63D0;&#x4EA4;&#x95EE;&#x9898;&#x5DF2;&#x7ECF;&#x6CA1;&#x4EBA;&#x89E3;&#x7B54;&#x3002;/(&#x3112;o&#x3112;)/~~<br>&#x5F53;&#x65F6;&#x662F;&#x7B2C;&#x4E00;&#x53CD;&#x5E94;&#x662F;&#x662F;&#x4E0D;&#x662F;&#x9875;&#x9762;&#x518D;&#x70B9;&#x51FB;&#x4E0B;&#x4E00;&#x9875;&#x65F6;&#x662F;&#x4E0D;&#x662F;&#x89E6;&#x53D1;&#x4E86;&#x8FD4;&#x56DE;&#x3002;<img src="/2016/12/10/SUI-mobile-router/38.png" alt="&#x6B64;&#x5904;&#x8F93;&#x5165;&#x56FE;&#x7247;&#x7684;&#x63CF;&#x8FF0;">&#x4E8E;&#x662F;&#x5C06;&#x9875;&#x9762;&#x4E0A;&#x6240;&#x6709;&#x7684;back&#x53BB;&#x6389;&#x53D1;&#x73B0;&#x95EE;&#x9898;&#x4F9D;&#x7136;&#x5B58;&#x5728;&#x3002;&#x6B64;&#x65F6;&#x5FC3;&#x60C5;&#x5DF2;&#x63A5;&#x8FD1;&#x5D29;&#x6E83;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E0A;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#xFF0C;&#x5728;&#x624B;&#x673A;&#x4E0A;&#x5C31;&#x6CA1;&#x7528;&#x4E86;&#x5462;&#x3002;&#x3002;&#x4E8E;&#x662F;&#x6211;&#x53D1;&#x6325;&#x6211;&#x767E;&#x5219;&#x4E0D;&#x9976;&#x7684;&#x7CBE;&#x795E;&#x3002;&#x51B3;&#x5B9A;&#x56F0;&#x96BE;&#x7684;&#x4E8B;&#x60C5;&#x7B80;&#x5355;&#x505A;&#xFF0C;&#x518D;&#x770B;&#x4E00;&#x904D;API&#x548C;&#x5B98;&#x65B9;demo&#x6F14;&#x793A;&#xFF0C;&#x53D1;&#x73B0;&#x6211;&#x4E00;&#x76F4;&#x53EA;&#x662F;&#x5728;&#x7528;js&#x63A7;&#x5236;&#x5185;&#x8054;&#x8DF3;&#x8F6C;&#xFF0C;&#x800C;&#x6CA1;&#x6709;&#x60F3;&#x8FC7;&#x76F4;&#x63A5;&#x7528;a&#x6807;&#x7B7E;href&#x8DF3;&#x8F6C;&#x3002;&#x4E8E;&#x662F;&#x6211;&#x7ACB;&#x9A6C;&#x5C06;&#x4EE3;&#x7801;&#x6539;&#x6210;href&#x8DF3;&#x8F6C;&#x65B9;&#x5F0F;&#x3002;&#x7ED3;&#x679C;&#x53D1;&#x73B0;&#x7ADF;&#x80FD;&#x53EF;&#x4EE5;&#x6210;&#x529F;&#x8DF3;&#x8F6C;&#x3002;&#x4E00;&#x8138;&#x61F5;&#x903C;&#x3002;&#x3002;&#x8FD9;&#x6837;&#x90FD;&#x884C;&#x3002;&#x5F53;&#x73B0;&#x5728;&#x6211;&#x90FD;&#x6CA1;&#x627E;&#x5230;&#x539F;&#x56E0;&#x3002;&#x603B;&#x4E4B;&#x95EE;&#x9898;&#x662F;&#x89E3;&#x51B3;&#x4E86;&#x3002;</p>
+<h2 id="ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;"><a href="#ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;" class="headerlink" title="ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;"></a>ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;</h2><h3 id="&#x7528;&#x6CD5;"><a href="#&#x7528;&#x6CD5;" class="headerlink" title="&#x7528;&#x6CD5;"></a>&#x7528;&#x6CD5;</h3><p>1&#x3001;<code>&lt;a href=&quot;/docs-demos/router2&quot;&gt;ajax&#x52A0;&#x8F7D;&#x65B0;&#x9875;&#x9762;&lt;/a&gt;&lt;/li&gt;</code><br>2&#x3001;$.router.load(url, ignoreCache)&#x540E;&#x9762;&#x53C2;&#x6570;&#x610F;&#x4E49;&#xFF1A;&#x5982;&#x679C;&#x4E3A;TRUE&#x5BF9;&#x4E8E;&#x52A0;&#x8F7D;&#x8FC7;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x53EA;&#x8981;&#x9875;&#x9762;&#x6CA1;&#x5237;&#x65B0;&#xFF0C;&#x90A3;&#x4E48;&#x518D;&#x6B21;&#x8FDB;&#x5165;&#x8BE5;&#x9875;&#x9762;&#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x4F18;&#x5148;&#x8BFB;&#x53D6;&#x7F13;&#x5B58;&#x800C;&#x4E0D;&#x53D1;&#x9001;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x8BF7;&#x6C42;&#xFF0C;&#x5219;&#x8BBE;&#x4E3A;false&#x3002;<br>ajax&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;&#x4E3B;&#x8981;&#x7684;&#x5751;&#x5C31;&#x662F;&#x9875;&#x9762;&#x8DF3;&#x8F6C;&#x8FD4;&#x56DE;&#x65F6;&#x9875;&#x9762;&#x4E0D;&#x5237;&#x65B0;&#x3002;<img src="/2016/12/10/SUI-mobile-router/fg.gif" alt="&#x6B64;&#x5904;&#x8F93;&#x5165;&#x56FE;&#x7247;&#x7684;&#x63CF;&#x8FF0;"><br>&#x56FE;&#x7247;&#x4E0A;&#x53EF;&#x4EE5;&#x6E05;&#x695A;&#x7684;&#x770B;&#x5230;&#x53EA;&#x6709;&#x9875;&#x9762;&#x7B2C;&#x4E00;&#x6B21;&#x8FDB;&#x6765;&#x7684;&#x65F6;&#x5019;&#x53D1;&#x9001;&#x4E86;&#x8BF7;&#x6C42;&#x5F53;&#x7528;&#x6237;&#x8FD4;&#x56DE;&#x518D;&#x8FDB;&#x6765;&#x5E76;&#x6CA1;&#x6709;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x3002;&#x8FD9;&#x4E2A;&#x5C31;&#x6709;&#x70B9;&#x5C34;&#x5C2C;&#x4E86;&#x3002;<br>&#x5F53;&#x65F6;&#x7B2C;&#x4E00;&#x4E2A;&#x60F3;&#x6CD5;&#x5C31;&#x662F;&#x5F3A;&#x5236;&#x5237;&#x65B0;&#x9875;&#x9762;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x5F3A;&#x5236;&#x5237;&#x65B0;&#x653E;&#x5728;&#x54EA;&#x4E2A;&#x5730;&#x65B9;&#x8FD9;&#x4E2A;&#x5C31;&#x6709;&#x70B9;&#x5751;&#x4E86;&#x3002;SUI&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x4E8B;&#x4EF6;&#x6709;&#x591A;&#x4E2A;&#x8FC7;&#x7A0B;</p>
+<p>&#x4E8B;&#x4EF6;  &#x8BF4;&#x660E;<br>pageLoadStart   &#x53D1;&#x9001;Ajax&#x4E4B;&#x524D;&#x89E6;&#x53D1;<br>pageLoadCancel  &#x53D6;&#x6D88;&#x4E86;&#x6B63;&#x5728;&#x53D1;&#x9001;&#x7684;ajax&#x8BF7;&#x6C42;<br>pageLoadError   Ajax &#x8BF7;&#x6C42;&#x5931;&#x8D25;<br>pageLoadComplete    Ajax &#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x6210;&#x529F;&#x8FD8;&#x662F;&#x5931;&#x8D25;<br>pageAnimationStart  &#x65B0;&#x9875;&#x9762;&#x7684;DOM&#x63D2;&#x5165;&#x5F53;&#x524D;&#x9875;&#x9762;&#x4E4B;&#x540E;&#xFF0C;&#x52A8;&#x753B;&#x6267;&#x884C;&#x4E4B;&#x524D;<br>pageAnimationEnd    &#x65B0;&#x9875;&#x9762;&#x52A8;&#x753B;&#x6267;&#x884C;&#x5B8C;&#x6BD5;<br>beforePageRemove    &#x52A0;&#x8F7D;&#x65B0;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x52A8;&#x753B;&#x5207;&#x6362;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x79FB;&#x9664;&#x65E7;&#x7684; document &#x524D;&#x53D1;&#x9001;&#xFF0C;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x662F;event, $pageContainer&#xFF0C;&#x5176;&#x4E2D;$pageContainer &#x662F; .page-group&#xFF08;&#x6CE8;&#xFF1A;&#x5728;   window &#x4E0A;&#x89E6;&#x53D1;&#xFF0C;&#x4E14;&#x5185;&#x8054; page &#x7684;&#x5207;&#x6362;&#x4E0D;&#x4F1A;&#x89E6;&#x53D1;&#x6B64;&#x4E8B;&#x4EF6;&#xFF09;<br>pageRemoved &#x52A0;&#x8F7D;&#x65B0;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x52A8;&#x753B;&#x5207;&#x6362;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x79FB;&#x9664;&#x65E7;&#x7684; document &#x540E;&#x53D1;&#x9001;&#xFF08;&#x6CE8;&#xFF1A;&#x5728; window &#x4E0A;&#x89E6;&#x53D1;&#xFF0C;&#x4E14;&#x5185;&#x8054; page &#x7684;&#x5207;&#x6362;&#x4E0D;&#x4F1A;&#x89E6;&#x53D1;&#x6B64;&#x4E8B;&#x4EF6;&#xFF09;<br>beforePageSwitch    page &#x5207;&#x6362;&#x524D;&#x89E6;&#x53D1;&#xFF0C;&#x8BE5;&#x4E8B;&#x4EF6;&#x5728; pageAnimationStart &#x524D;&#xFF0C;beforePageSwitch &#x4E4B;&#x540E;&#x4F1A;&#x505A;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x5904;&#x7406;&#x624D;&#x89E6;&#x53D1; pageAnimationStart<br>pageInit    &#x65B0;&#x9875;&#x9762;&#x4E2D;&#x7684;&#x7EC4;&#x4EF6;&#x521D;&#x59CB;&#x5316;&#x5B8C;&#x6BD5;<br>js&#x5F3A;&#x5236;&#x5237;&#x65B0;&#x5F53;&#x65F6;&#x60F3;&#x5230;&#x4E86;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;<br>1&#x3001;window.location.reload()//&#x9875;&#x9762;&#x5237;&#x65B0;<br>2&#x3001;window.location.replace()//&#x9875;&#x9762;&#x8DF3;&#x8F6C;<br>reload()&#x7ECF;&#x6D4B;&#x8BD5;&#x5728;&#x7528;&#x6237;&#x8FD4;&#x56DE;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x5F53;&#x524D;&#x9875;&#x9762;&#x51FA;&#x73B0;&#x591A;&#x6B21;&#xFF0C;&#x76F4;&#x63A5;pass&#x6389;<br>&#x53EA;&#x80FD;&#x8003;&#x8651;replace&#x4E86;&#x3002;<br>&#x7ED3;&#x5408;sui&#x9875;&#x9762;&#x52A0;&#x8F7D;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x53D1;&#x73B0;replace&#x53EA;&#x80FD;&#x653E;&#x5728;&#x9875;&#x9762;DOM&#x63D2;&#x5165;&#x524D;&#x5426;&#x5219;&#x7528;&#x6237;&#x4F1A;&#x611F;&#x89C9;&#x8DF3;&#x8F6C;&#x4E24;&#x6B21;&#x9875;&#x9762;&#x3002;<br>&#x8FD9;&#x65F6;&#x5019;&#x53C8;&#x51FA;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x95EE;&#x9898;&#xFF0C;replace&#x653E;&#x5728;&#x54EA;&#x4E2A;&#x9875;&#x9762;&#x53C8;&#x8DF3;&#x8F6C;&#x5230;&#x54EA;&#x4E2A;&#x9875;&#x9762;&#xFF0C;&#x5728;PC&#x4E0A;&#x53EA;&#x8981;&#x662F;replace&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#x90FD;&#x6CA1;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x624B;&#x673A;&#x4E0A;&#x9875;&#x9762;&#x5C31;&#x627E;&#x4E0D;&#x5230;&#x4E86;&#x3002;/(&#x3112;o&#x3112;)/~~&#x6700;&#x540E;&#x53D1;&#x73B0;repace&#x5728;&#x624B;&#x673A;&#x4E0A;&#x53EA;&#x80FD;&#x5F53;&#x524D;&#x9875;&#x9762;&#x3002;&#x6240;&#x4EE5;&#x6700;&#x540E;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x5C31;&#x662F;<br>&#x4F8B;&#x5982;&#x4E0A;&#x56FE;&#xFF1A;&#x4ECE;&#x6210;&#x529F;&#x9875;&#x9762;&#x8DF3;&#x8F6C;&#x5230;&#x5217;&#x8868;&#x9875;&#x9762;&#x9700;&#x8981;&#x5728;&#x6210;&#x529F;&#x9875;&#x9762;pageAnimationStart&#x4E8B;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;replace&#x5F53;&#x524D;&#x9875;&#x9762;&#xFF0C;&#x5B8C;&#x7F8E;&#x89E3;&#x51B3;&#x3002;</p>
+<p>#&#x603B;&#x7ED3;<br>1&#x3001;&#x5185;&#x8054;&#x591A;&#x4E2A;&#x9875;&#x9762;&#x5C3D;&#x91CF;&#x7528;a&#x94FE;&#x63A5;&#x7684;href&#xFF0C;&#x9632;&#x6B62;&#x624B;&#x673A;&#x9875;&#x9762;&#x8DF3;&#x8F6C;&#x6765;&#x56DE;BUG<br>2&#x3001;ajax&#x8DF3;&#x8F6C;&#x5982;&#x679C;&#x9700;&#x8981;&#x5237;&#x65B0;&#x9875;&#x9762;&#x8FD9;&#x9700;&#x8981;&#x5728;&#x5F53;&#x524D;&#x9875;&#x9762;pageAnimationStart&#x4E8B;&#x4EF6;&#x4E2D;&#x52A0;&#x4E0A;replace&#x5F3A;&#x5236;&#x5237;&#x65B0;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/移动端/" rel="tag">#移动端</a>
+          
+            <a href="/tags/路由/" rel="tag">#路由</a>
+          
+            <a href="/tags/route/" rel="tag">#route</a>
+          
+            <a href="/tags/SUI/" rel="tag">#SUI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/10/UC-bugs/" rel="next" title="UC浏览器返回上一页快照BUG">
+                <i class="fa fa-chevron-left"></i> UC浏览器返回上一页快照BUG
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/10/tahaowoyehao/" rel="prev" title="前后端分离 Ta好我也好">
+                前后端分离 Ta好我也好 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/10/SUI-mobile-router/"
+           data-title="跳出SUI Mobile路由坑" data-url="http://yoursite.com/2016/12/10/SUI-mobile-router/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.jpg"
+               alt="Aisino FEX" />
+          <p class="site-author-name" itemprop="name">Aisino FEX</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用法："><span class="nav-number">1.</span> <span class="nav-text">用法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax加载新页面"><span class="nav-number"></span> <span class="nav-text">ajax加载新页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">1.</span> <span class="nav-text">用法</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aisino FEX</span>
+</div>
+<style>
+.footer-inner:before { float:none;}
+.powered-by::after { content:''}
+.powered-by .theme-link { margin:0 5px; font-size:12px; text-decoration:none; border-bottom:none;}
+.powered-by .theme-link:hover { text-decoration:underline;}
+.theme-info { font-size:12px;}
+</style>
+<div class="powered-by" style="display:block; margin:0;">
+	<a class="theme-link" href="http://zjaisino.github.io/" target="_blank">爱信诺前端规范</a>
+	<a class="theme-link" href="http://www.jss.com.cn/" target="_blank">诺诺服务</a>
+	<a class="theme-link" href="http://www.axnsc.com/" target="_blank">诺诺商城</a>
+	<a class="theme-link" href="https://www.axnjf.com/" target="_blank">诺诺金服</a>
+	<a class="theme-link" href="http://cloud.jss.com.cn/" target="_blank">诺诺云记账</a>
+</div>
+
+<div class="theme-info" style="display:block;">
+	<span>FEX 是爱信诺研发中心 [前端开发团队] 内部名称，其中 FE 是 Front End 的缩写，X 代表我们不仅关注前端技术，还更重视全端及全栈的能力。</span>
+</div>
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery/jquery.layer.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery/function.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"axnfex"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
